@@ -1,0 +1,38 @@
+/* pages/create/create.wxss */
+page
+{
+    background-color:#f4f4f5;
+}
+
+
+.main
+{
+    width: 85%;
+    margin: auto;
+    background-color: #fff;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.left_one
+{
+    font-size: 14px;
+    margin-left: 20px;
+    color: #646566;
+    text-align: left;
+}
+
+.right_one
+{
+    font-size: 14px;
+    color: #323233;
+    margin-right: 10px;
+}
+
+.seleTime
+{
+  margin-right: 35px;
+  color: #323233;
+  font-size: 14px;
+}

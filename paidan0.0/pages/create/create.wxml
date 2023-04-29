@@ -1,0 +1,89 @@
+<!--pages/create/create.wxml-->
+
+<view style="width: 100%;height: 20px;">
+    
+</view>
+<view class="main" style="border-radius: 10px 10px 0 0;">
+    <view class="left_one">
+        <text style="font-size: 16px;font-weight: 1000;color: #000;">信息</text>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>报修内容</text>
+    </view>
+    <view class="right_one">
+        
+        <input type="text" placeholder="请输入报修内容" value="{{orderInfo.type}}" bindinput="onInputInfo" data-params = "type"/>
+
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>维修时间</text>
+    </view>
+    <view class="right_one seleTime">
+        <van-cell is-link bind:click="showPopup">请选择维修时间</van-cell>
+        
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>地点</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入地点" value="{{orderInfo.location}}" bindinput="onInputInfo" data-params = "location"/>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>企业名称</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入企业名称" value="{{orderInfo.companyName}}" bindinput="onInputInfo" data-params = "companyName"/>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>联系人</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入联系人名字" value="{{orderInfo.linkMan}}" bindinput="onInputInfo" data-params = "linkMan"/>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>联系电话</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入联系人电话" value="{{orderInfo.phone}}" bindinput="onInputInfo" data-params = "phone"/>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>备注</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入备注" value="{{orderInfo.other}}" bindinput="onInputInfo" data-params = "other"/>
+    </view>
+</view>
+
+
+
+
+
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+  <van-datetime-picker
+  wx:if="{{pickerShow}}"
+  type="date-time"
+  value="{{ currentDate }}"
+  bind:input="onInput"
+  min-date="{{ minDate }}"
+  formatter="{{ formatter }}"
+  bind:cancel="cancelTime"
+  bind:confirm="confirmTime"
+  title="选择时间"
+  item-height="40"
+/>
+
+</van-popup>
