@@ -6,13 +6,9 @@ Page({
 
     data:{
         access_token:'',
-        code:""
-    },
-
-
-
+        code:"",
+    },    
     async onLoad(){
-
        wx.qy.login({
             success:(res)=>{
                 this.setData({
@@ -20,12 +16,9 @@ Page({
                 })
             }
         })
-
-
-
         const secret = "CcmlfWVlna_houY1IdaSKOWZo0It5_qFRN2DYMB9aec"
-        // const secret = "7M_cy09NtTS_WPOXK68Kb4FDByvifCJ0u45fkx7mQuA"
         const corpid = "wwe8350900d1501c10"
+        // const secret = "7M_cy09NtTS_WPOXK68Kb4FDByvifCJ0u45fkx7mQuA"
         let data = {
             corpid:corpid,
             corpsecret:secret
@@ -51,11 +44,9 @@ Page({
                 method:"GET",
                 data:data_getInfo,
                 success:(res)=>{
-                    // console.log(res)
+                    console.log(res)
                 }
               })
-
-
           }
         })
 

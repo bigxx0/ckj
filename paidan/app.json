@@ -3,27 +3,26 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/my/my",
-    "pages/create/create"
+    "pages/create/create",
+    "pages/detail/detail",
+    "pages/distribute/distribute"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#6eb2f7",
     "navigationBarTitleText": "创科捷",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle":"white",
     "enablePullDownRefresh": true   
   },
   "usingComponents": {
-    "van-button": "@vant/weapp/button/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
+
     "van-tabbar": "@vant/weapp/tabbar/index",
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
-    "van-popup": "@vant/weapp/popup/index",
-    "van-transition": "@vant/weapp/transition/index",
-    "van-calendar":"@vant/weapp/calendar/index",
-    "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+
+    "van-icon": "@vant/weapp/icon/index"
+    
 
   },
   "sitemapLocation": "sitemap.json",

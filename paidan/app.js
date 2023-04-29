@@ -3,6 +3,8 @@
 
 
 App({
-
+    globalData:{
+        msg1:''
+    }
 
 })

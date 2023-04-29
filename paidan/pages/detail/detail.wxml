@@ -1,0 +1,7 @@
+<van-datetime-picker
+  type="datetime"
+  value="{{ currentDate }}"
+  min-date="{{ minDate }}"
+
+  bind:input="onInput"
+/>

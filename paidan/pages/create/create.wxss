@@ -4,13 +4,12 @@ page
     background-color:#f4f4f5;
 }
 
-
 .main
 {
     width: 85%;
     margin: auto;
     background-color: #fff;
-    height: 40px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,7 +31,14 @@ page
 
 .seleTime
 {
-  margin-right: 35px;
+
+  margin-right: 52px;
   color: #323233;
   font-size: 14px;
+}
+
+.btn
+{
+    width: 50%;
+    margin-top: 50px;
 }

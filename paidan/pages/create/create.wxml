@@ -22,9 +22,8 @@
     <view class="left_one">
         <text>维修时间</text>
     </view>
-    <view class="right_one seleTime">
-        <van-cell is-link bind:click="showPopup">请选择维修时间</van-cell>
-        
+    <view class="right_one seleTime" style="text-align: center;">
+        <van-cell is-link bind:click="showPopup">{{msg}}</van-cell>
     </view>
 </view>
 <view class="main">
@@ -68,14 +67,13 @@
     </view>
 </view>
 
-
+<button type="primary" class='btn' bindtap="commit_btn">提交</button>
 
 
 
 <van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
   <van-datetime-picker
-  wx:if="{{pickerShow}}"
-  type="date-time"
+  type="datetime"
   value="{{ currentDate }}"
   bind:input="onInput"
   min-date="{{ minDate }}"
@@ -87,3 +85,4 @@
 />
 
 </van-popup>
+
