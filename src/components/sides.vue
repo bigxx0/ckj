@@ -280,7 +280,7 @@ export default {
       isShow6: false,
       isRotate6: false,
       isBc: false,
-      isBcli: true,      
+      isBcli: true,
       activeIndex0_il: -1,
       activeIndex1_il: -1,
       activeIndex2_il: -1,
@@ -324,8 +324,10 @@ export default {
   user-select: none;
 }
 
+
 .view {
-  transform: translate(350px, -308px);
+  position: absolute;
+  transform: translate(350px, 150px);
 }
 
 .up {

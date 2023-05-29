@@ -147,7 +147,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    transform: translateY(-300px);
+    transform: translateY(-600px);
   }
   
   .title {
