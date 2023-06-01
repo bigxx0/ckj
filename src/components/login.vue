@@ -37,6 +37,9 @@ export default {
             // alert("登录过期，请先登录")
             this.fail()
             console.log(token)
+        }else{
+            // alert("您已登录")
+            this.logined()
         }
     },
     methods: {
@@ -82,6 +85,14 @@ export default {
             ElNotification({
                 title: 'Success',
                 message: '登录成功',
+                type: 'success',
+            })
+        },
+
+        logined() {
+            ElNotification({
+                title: 'Success',
+                message: '您已登录',
                 type: 'success',
             })
         },

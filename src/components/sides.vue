@@ -313,6 +313,7 @@ export default {
       this[activeIndexName] = index;
       // console.log("我点的是",this[activeIndexName])
     },
+
   }
 }
 </script>
