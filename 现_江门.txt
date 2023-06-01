@@ -1,0 +1,129 @@
+import scrapy
+import os
+from datetime import datetime
+from grasp_new.items import GraspNewItem
+
+
+class GraspNewInitSpider(scrapy.Spider):
+
+    def __init__(self, param=None, **kwargs):
+        # 获取当前日期
+        self.date_this = param['date_this']
+        self.date_other = param['date_other']
+        super().__init__(**kwargs)
+
+
+    name = "jiangmen"
+
+    dir_name = "grasp_jiangmen"
+    # 判断文件夹是否存在
+    if not os.path.exists(dir_name):
+        # 如果不存在则创建新的文件夹
+        os.mkdir(dir_name)
+    else:
+        # 如果存在则直接跳过
+        pass
+
+
+    url = [
+        "http://www.jiangmen.gov.cn/bmpd/jmsfzhggj/gggs/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsjyj/zwgk/zcwj/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsgyhxxhj/gxxx/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsgaj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsmzj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmssfj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsczj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsrlzyhshbzj/zwgk/zcwj/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmszrzyj/zwdt/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmssthjj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmszfhcxjsj/zwgk/gztg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsjtysj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsslj/zwgk/gstg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsnyncj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsswj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmswhgdlytyj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmswsjkj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmstyjrswj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsyjglj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmssjj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsgzw/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsscjdglj/zwdt/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmstjj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsylbzj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmscsglhzhzfj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsxfj/zwxx/gzdt/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmszwfwsjglj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsshbxjjglj/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsmzzjswj/zwgk/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmszftzgcjsglzx/zwgk/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmstdcbzx/zwdt/tzgg/index.html",
+        "http://www.jiangmen.gov.cn/bmpd/jmsgxhzls/tzgg/index.html"
+        , "http://www.jiangmen.gov.cn/bmpd/jmsglj/zwgk/xwzx/tzgg/index.html"
+    ]
+
+    name_webside = [
+        "0江门市发展和改革局", "1江门市教育局", "2江门市工业和信息化局", "3江门市公安局",
+        "4江门市民政局", "5江门市司法局", "6江门市财政局", "7江门市人力资源和社会保障局", "8江门市自然资源局",
+        "9江门市生态环境局", "10江门市住房和城乡建设局", "11江门市交通运输局", "12江门市水利局",
+        "13江门市农业农村局",
+        "14江门市商务局", "15江门市文化广电旅游体育局", "16江门市卫生健康局", "17江门市退役军人事务局",
+        "18江门市应急管理局",
+        "19江门市审计局", "20江门市人民政府国有资产监督管理委员会", "21江门市市场监督管理局", "22江门市统计局",
+        "23江门市医疗保障局", "24江门市城市管理和综合执法局", "25江门市信访局", "26江门市政务服务数据管理局",
+        "27江门市社会保险基金管理局", "28江门市民族宗教事务局", "29江门市政府投资工程建设管理中心",
+        "30江门市土地储备中心",
+        "31江门市供销合作联社", "32江门市公路事务中心"
+    ]
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+    }
+
+    parse_rules = [".//div[@class='pageList']/ul/li/a/@title", ".//div[@class='pageList']/ul/li/span/text()"]
+
+
+    def filter_date(self, date, title):
+        incorrect_index = []
+        for i in range(len(date)):
+
+            if int(str(date[i]).find(self.date_this)) != -1 or int(str(date[i]).find(self.date_other)) != -1:
+                pass
+            else:
+                incorrect_index.append(i)
+
+        incorrect_index.sort(reverse=True)  # 对索引列表按照从大到小的顺序进行排序
+        for i in incorrect_index:
+            date.pop(i)
+            title.pop(i)
+        return date, title
+
+    def start_requests(self):
+        for i in range(len(self.url)):
+            item = GraspNewItem()
+            yield scrapy.Request(self.url[i], callback=self.parse, headers=self.headers,
+                                 meta={'index': i, 'item': item})
+        pass
+
+
+
+    def parse(self,response):
+        item = response.meta.get('item')
+        index = response.meta.get('index')
+        title = []
+        date = []
+
+        for i in response.xpath(self.parse_rules[0]).getall():
+            title.append(i.strip())
+
+        for i in response.xpath(self.parse_rules[1]).getall():
+            date.append(i.strip())
+
+
+        print(title)
+        print(date)
+        filter = self.filter_date(date, title)
+
+        item['date'] = filter[0]
+        item['title'] = filter[1]
+        item['name'] = os.path.join(self.dir_name, self.name_webside[index] + '.xlsx')
+
+        yield item
