@@ -92,10 +92,10 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  width: 100%;
+  width: 60%;
   justify-content: center;
   align-items: center;
-  transform: translateY(-300px);
+  /* transform: translateY(-300px); */
 }
 
 .title {

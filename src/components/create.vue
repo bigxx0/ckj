@@ -141,7 +141,7 @@ export default {
   width: 100%;
   justify-content: center;
   align-items: center;
-  transform: translateY(-600px);
+  transform: translateY(-300px);
 }
 
 .title {
