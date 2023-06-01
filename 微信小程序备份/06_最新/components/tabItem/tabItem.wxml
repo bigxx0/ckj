@@ -1,0 +1,38 @@
+<!--components/tabItem/tabItem.wxml-->
+<wxs module="handleEvent" src="../../utils/handleFormat.wxs"></wxs>
+<view>
+    <view 
+                class="item {{index % 2 == 0 ? 'border-gray' : 'border-white'}} {{selectedId === item.orderId ? 'active':''}}"
+                bindtap="collapseItem"
+                data-src="{{index}}"
+                data-orderId="{{item.orderId}}"
+                bindtouchstart="mouseClick"
+                bindtouchend="mouseMove"
+                >
+                    <view class="describe">
+                        <text class="info1">{{item.customerName}}</text>
+                        <text class="info2 detail">{{item.content}}</text>
+                    </view>
+                    <view class="right_icon">
+                        <van-icon name="{{item.icon_name}}"/>
+                    </view>
+                </view>
+                <!-- 下拉菜单开始 -->
+                <view class="down_menu" wx:if="{{item.isShow}}">
+                    <view class="down_menu-view"><text class="information">地点：{{item.address}}</text></view>
+                    <view class="down_menu-view"><text class="information">联系人：{{item.contactMan}}</text></view>
+                    <view class="down_menu-view"><text class="information content">工单内容：{{item.content}}</text></view>
+                    <view class="down_menu-view"><text class="information detail-down">备注：【{{item.detail == null ? "暂无备注":item.detail}}】</text></view>
+                    <view class="down_menu-view"><text class="information">电话：{{item.phone}}</text></view>
+                    <view class="down_menu-view"><text class="information">单位名称：{{item.customerName}}</text></view>
+                    <view class="down_menu-view"><text class="information">工单创建时间：{{item.createTime}}</text></view>
+                    <view class="down_menu-view"><text class="information">工单创建人：{{item.createBy}}</text></view>
+                    <view class="down_menu-view"><text class="information">工单状况：{{handleEvent.statusFormat(item.status)}}</text></view>
+                    <view style="height: 140rpx;"></view>
+                    <!-- 不同的状态下有不同的按钮，按钮进行slot插槽等待被插（`~`） -->
+                    <slot name = "button_slot"></slot>
+
+                </view>
+                <!-- 下拉菜单结束 -->
+</view>
+

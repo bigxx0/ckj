@@ -1,0 +1,49 @@
+<!--components/calendar/calendar.wxml-->
+
+<view class="container">
+    <view bindtap="onDisplay" class="selectTopTime">
+            <image src="../../static/img/icon/calendar.png" class="calendarIcon"/>
+            {{date}}
+    </view>
+
+    <view class="rightItem" bindtap="onRight">
+        <view>{{quick_search}}</view>
+    </view>
+</view>
+
+<view class="selectTimeContent">
+<!-- packAll为背景 -->
+
+    <view class="packAll" bindtap="backgroundMenu" wx:if="{{selectTimeShow}}"></view>
+    <view class="{{css_name}}" wx:if="{{selectTimeShow}}">
+                <view class="content" catchtap="commitDateToStore" data-id = "1" data-name = "查找今天">
+                    <text class="content_text">查找今天</text>
+                </view>
+    
+                <view class="content" catchtap="commitDateToStore" data-id = "7" data-name = "最近一周">
+                    <text class="content_text">最近一周</text>
+                </view>
+
+                <view class="content" catchtap="commitDateToStore" data-id = "30" data-name = "最近一个月">
+                    <text class="content_text">最近一个月</text>
+                </view>
+
+                <view class="content" catchtap="commitDateToStore" data-id = "0" data-name = "查找全部">
+                    <text class="content_text">查找全部</text>
+                </view>
+    </view>
+</view>
+            
+
+
+<!-- ======================================================== -->
+<van-calendar
+  show="{{ show }}"
+  min-date="{{ minDate }}"
+  max-date="{{ maxDate }}"
+  type="range"
+  bind:close="onClose"
+  bind:confirm="onConfirm"
+  show-confirm="{{ false }}"
+  color="#6eb2f7"
+/>

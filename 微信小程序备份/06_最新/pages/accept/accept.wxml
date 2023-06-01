@@ -1,0 +1,118 @@
+<wxs module="handleEvent" src="../../utils/handleFormat.wxs"></wxs>
+<van-tabs swipeable sticky active="{{active}}" bind:change="tabChange" color="#6eb2f7" title-active-color="#6eb2f7">
+    <van-tab title="待接单">
+        <!-- 这里是待接单页面 -->
+        <!-- 工单单元格开始 -->
+        <!-- wx-if 开始 -->
+        <view wx:if="{{ dataInfo.length !== 0 && dataInfo !== null}}" style="height:{{handleEvent.windowHeightFormatWithoutCalendar(windowHeight)}};">
+            <tabItem wx:for="{{dataInfo}}" wx:key="index" item="{{item}}" index="{{index}}" style="position: relative;" bind:initInformation="initInformation">
+                <!-- 插槽，插入在组件当中 -->
+                <view slot="button_slot">
+                    <view class="commit_agree">
+                        <button class="primary" 
+                            data-orderId="{{item.orderId}}" 
+                            data-type="1" 
+                            bindtap="isAccept" 
+                            bindtouchstart="mouseClick" 
+                            bindtouchend="mouseMove"
+                            data-active = "accpet"
+                            >
+                            接受 
+                        </button>
+                    </view>
+
+                    <view class="commit_disagree">
+                        <button class="danger" 
+                        data-orderId="{{item.orderId}}" 
+                        data-type="0" 
+                        bindtap="isAccept" 
+                        bindtouchstart="" 
+                        bindtouchend=""
+                        data-active = "refuse"
+                        >
+                        拒绝
+                        </button>
+
+
+                        
+                    </view>
+                </view>
+            </tabItem>
+
+
+
+        </view>
+        <!-- wx-if 结束，wx-else开始 -->
+        <view wx:else="{{ dataInfo.length == 0 || dataInfo == null}}" class="none_message" style="height:{{handleEvent.windowHeightFormatWithoutCalendar(windowHeight)}};">
+            <van-empty description="暂无数据"></van-empty>
+        </view>
+        <!-- wx-else结束 -->
+        <!-- 工单单元格结束 -->
+
+    </van-tab>
+    <van-tab title="未完成">
+        <!-- 这里是未完成页面 -->
+        <!-- 工单单元格开始 -->
+        <!-- wx-if 开始 -->
+        <view wx:if="{{ dataInfo.length !== 0 && dataInfo !== null}}" style="height:{{handleEvent.windowHeightFormatWithoutCalendar(windowHeight)}};">
+            <tabItem wx:for="{{dataInfo}}" wx:key="index" item="{{item}}" index="{{index}}" style="position: relative;" bind:initInformation="initInformation">
+                <!-- 插槽，插入在组件当中 -->
+                <view slot="button_slot">
+                        <view class="commit_add">
+                            <button class="primary no-border-bacc-blue" bindtap="toDetails" data-orderid = "{{item.orderId}}">详情 </button>
+                        </view>
+
+                        <view class="commit_revoke">
+                            <button class="danger" data-orderId="{{item.orderId}}" data-type="0" bindtap="isAccept" data-active="revoke">撤销</button>
+                        </view>
+
+                        <view class="commit_finish" bindtap="finishOrders" data-orderId="{{item.orderId}}">
+                            <image src="../../static/img/icon/finish.png" mode="" style="width: 30px;height: 30px;" />
+                            <text>完成</text>
+                        </view>
+
+                </view>
+            </tabItem>
+        </view>
+        <!-- wx-if 结束，wx-else开始 -->
+        <view wx:else="{{ dataInfo.length == 0 || dataInfo == null}}" class="none_message" style="height:{{handleEvent.windowHeightFormatWithoutCalendar(windowHeight)}};">
+            <van-empty description="暂无数据">
+            </van-empty>
+        </view>
+        <!-- wx-else结束 -->
+
+        <!-- 工单单元格结束 -->
+
+
+    </van-tab>
+    <van-tab title="已完成">
+        <!-- 这里是已完成页面 -->
+        <!-- 工单单元格开始 -->
+        <!-- wx-if 开始 -->
+        <view wx:if="{{ dataInfo.length !== 0 && dataInfo !== null}}" style="height:{{handleEvent.windowHeightFormatWithoutCalendar(windowHeight)}};">
+            <tabItem wx:for="{{dataInfo}}" wx:key="index" item="{{item}}" index="{{index}}" style="position: relative;" bind:initInformation="initInformation">
+                <!-- 插槽，插入在组件当中 -->
+                <view slot="button_slot">
+                    <view class="commit_finished"><button class="primary" disabled style="border: none;">已完成</button></view>
+                </view>
+                
+            </tabItem>
+
+
+
+        </view>
+        <!-- wx-if 结束，wx-else开始 -->
+        <view wx:else="{{ dataInfo.length == 0 || dataInfo == null}}" class="none_message" style="height:{{handleEvent.windowHeightFormatWithoutCalendar(windowHeight)}};">
+            <van-empty description="暂无数据">
+            </van-empty>
+        </view>
+        <!-- wx-else结束 -->
+
+        <!-- 工单单元格结束 -->
+
+    </van-tab>
+</van-tabs>
+
+
+
+<view class="standView"></view>

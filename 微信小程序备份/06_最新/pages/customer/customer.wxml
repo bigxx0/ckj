@@ -1,0 +1,51 @@
+<!-- 地点开始 -->
+
+<!-- 联系电话结束 -->
+<view class="fixed">
+    <search_bar bind:catchSearchList="catchSearchList"></search_bar>
+</view>
+
+
+
+<view style="width: 100%;height: 100%;position: absolute;z-index: 999;" class="del_cover" wx:if="{{showDel}}" bindtap="closeMenu">
+    <view class="del_menu" style="{{menuPosition}}">
+        <view class="del_item" bindtap="delCustomer">
+            <image src="../../static/img/icon/del.png" mode=""/>
+            <text>删除</text>
+        </view>
+        <view class="del_item">
+            <image src="../../static/img/icon/look.png" mode=""/>
+            <text>查看</text>
+        </view>
+    </view>
+</view>
+
+
+<!-- <view style="height: 5px;"></view> -->
+
+<view wx:for="{{searchList}}" wx:key="index">
+    <view class="item {{index % 2 == 0 ? 'border-gray' : 'border-white'}} {{selectedId === item.customerId ? 'active':''}}" 
+    bindtap="collapseItem" 
+    data-customerId="{{item.customerId}}" 
+    data-customername="{{item.customerName}}" 
+    data-contactman="{{item.contactMan}}"
+    bindlongpress="longTap"
+
+    bindtouchstart="mouseClick" 
+    bindtouchend="mouseMove"
+
+    >
+
+        <view class="describe">
+            <text>{{item.customerName}}</text>
+            <text>{{item.contactMan}}</text>
+        </view>
+        <view class="right_icon">
+            <van-icon name="arrow"/>
+        </view>
+    </view>
+    
+</view>
+
+
+<view style="height: 25px;"></view>

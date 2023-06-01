@@ -1,0 +1,17 @@
+<wxs module="handleEvent" src="../../utils/handleFormat.wxs"></wxs>
+<view style="height: 50px;"></view>
+
+
+<view class="content" bindtap="orderConfirm"  wx:for="{{employeeList}}" wx:key="index"  data-employeeId="{{item.id}}" data-employeeName="{{item.name}}"> 
+    <view class="avatar">{{handleEvent.nameFormat(item.name)}}</view>
+    <view class="direction">
+        <text class="title">{{item.name}}</text>
+        <text class="gray">{{item.position}}</text>
+    </view>
+    <van-icon name="arrow" style="margin-left: 230px;"></van-icon>
+</view>
+
+
+
+
+<view style="height: 15px;"></view>

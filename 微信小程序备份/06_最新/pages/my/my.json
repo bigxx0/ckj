@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "calendar":"../../components/calendar/calendar",
+        "van-button": "@vant/weapp/button/index",
+        "van-empty": "../../miniprogram_npm/@vant/weapp/empty/index",
+        "tabItem":"../../components/tabItem/tabItem"
+    },
+    "navigationBarTitleText": "工单分配",
+    "navigationBarTextStyle":"white"
+}

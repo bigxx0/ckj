@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "search_bar":"../../components/search_bar/search_bar"
+    },
+    "navigationBarTitleText": "搜索客户",
+    "navigationBarTextStyle":"white"
+}

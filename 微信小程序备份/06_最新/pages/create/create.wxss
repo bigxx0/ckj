@@ -1,0 +1,73 @@
+/* pages/create/create.wxss */
+page
+{
+    background-color:#f4f4f5;
+}
+.head_icon{
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+.arrow_icon{
+    display: block;
+    width: 16px; height: 16px;
+    /* margin-left: 100px; */
+    position: absolute;
+    right: 20px;
+}
+.head{
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    /* background-color:red; */
+    width: 100%;
+    padding: 1px;
+    position: relative;
+}
+.head text{
+    margin-left: 20px;
+}
+.main
+{
+    width: 85%;
+    margin: auto;
+    background-color: #fff;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.left_one
+{
+    font-size: 14px;
+    margin-left: 20px;
+    color: #646566;
+    text-align: left;
+}
+
+.right_one
+{
+    font-size: 14px;
+    color: #323233;
+    margin-right: 10px;
+}
+.left_one_seleTime{
+    font-size: 14px;
+    margin-left: 20px;
+    color: #646566;
+    text-align: left;
+    position: relative;
+}
+.seleTime
+{
+  position: absolute;
+  color: #323233;
+  font-size: 14px;
+  right: 50px;
+}
+
+.btn
+{
+    width: 50%;
+    margin-top: 50px;
+}

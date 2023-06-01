@@ -1,0 +1,87 @@
+<!--pages/repair/repair.wxml-->
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+  <van-datetime-picker
+  type="datetime"
+  value="{{ currentDate }}"
+  bind:input="onInput"
+  min-date="{{ minDate }}"
+  formatter="{{ formatter }}"
+  bind:cancel="cancelTime"
+  bind:confirm="confirmTime"
+  title="选择时间"
+  item-height="40"
+/>
+</van-popup>
+
+<view style="height: 50px;"></view>
+<view class="main" style="border-radius: 10px 10px 0 0;">
+    <view class="title">
+        <text style="font-size: 16px;font-weight: 1000;color: #000;margin-left: 20px;">维修记录</text>
+        <text style="font-size: 14px;color: #000;margin-right: 30px;font-weight: 700;"><text style="color: red;">*</text>为选填项，请先选择客户！</text>
+    </view>
+</view>
+<!-- 地点开始 -->
+
+<view class="main_item" style="height: auto;" >
+
+    <view class="text_main">
+        <text class="text_title">客户</text>
+        <input disabled class="text_input" style="width: 80%;" type="text" placeholder = "{{customer}}" bindtap="selectCustomer"/>
+    </view>
+
+
+    <view class="text_main">
+        <text class="text_title">带走时间</text>
+        <input disabled class="text_input" type="text" placeholder = "{{begin}}" bindtap="showPopup" data-type = "beginTime" />
+        <button class="get_time" bindtap="getCurrentTime" data-type="beginTime">获取当前时间</button>
+    </view>
+
+    <view class="text_main">
+        <text class="text_title">送回日期</text>
+        <input disabled class="text_input" type="text" placeholder = "{{end}}" bindtap="showPopup" data-type = "endTime" />
+        <button class="get_time" bindtap="getCurrentTime" data-type="endTime">获取当前时间</button>
+    </view>
+
+    <view class="text_main">
+        <text class="text_title"><text style="color: red;">*</text>设备信息</text>
+        <input class="text_input" style="width: 80%;" type="text" placeholder = "例：戴尔，3840电脑主机" bindinput="getInfor" data-type="equipment"/>
+    </view>
+
+    <view class="text_main">
+        <text class="text_title"><text style="color: red;">*</text>故障情况</text>
+        <input class="text_input" style="width: 80%;" type="text" placeholder = "例：蓝屏" bindinput="getInfor" data-type="damage"/>
+    </view>
+
+    <view class="text_main">
+        <text class="text_title"><text style="color: red;">*</text>处理事项</text>
+        <input class="text_input" style="width: 80%;" type="text" placeholder = "例：更换硬盘" bindinput="getInfor" data-type="task"/>
+    </view>
+
+
+
+
+
+    <view class="textarea_main">
+        <text style="font-size: 16px;font-weight: 1000;color: #000;margin-left: 10px;"><text style="color: red;">*</text>备注</text>
+        <textarea value="" class="text_area" bindinput="getTextArea"  />
+        
+    </view>
+
+
+
+
+
+
+    <button  class='btn {{isClick ? "active":""}}'  
+    bindtouchstart="mouseClick" 
+    bindtouchend="mouseMove"
+    bindtap="commit"
+    >提交</button>
+    <view style="height: 50px;"></view>
+</view>
+
+
+
+
+
+

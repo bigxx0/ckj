@@ -1,0 +1,13 @@
+<!--components/search/search.wxml-->
+<view class="contain">
+  <view class="icon" style="border-radius: 15px 0 0 15px;" >
+    <image src="../../static/img/icon/search.png" class="search_icon" />
+  </view>
+        <input type="text" class="search_bar" placeholder="请输入搜索关键词" 
+        bindinput="onInput" bindfocus="showCross" bindblur="showCross" 
+        value="{{ input_content }}" /> 
+  <view class="icon" style="border-radius: 0 15px 15px 0;">
+    <image src="../../static/img/icon/clear0.png" class="clear_icon" 
+           wx:if="{{ isShow }}" bindtap="onClear" />
+  </view>
+</view>

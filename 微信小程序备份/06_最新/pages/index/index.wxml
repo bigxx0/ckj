@@ -1,0 +1,61 @@
+<!-- index.wxml -->
+
+<!-- <van-button color="#72ddff" plain class="gongdan" bindtap="goToPage">查看工单</van-button> -->
+<!-- <van-button color="#72ddff" plain class="gongdan" bindtap="getUserInformation">授权</van-button> -->
+<!--index.wxml-->
+
+<!-- 开始复制，下面都可以删除 -->
+
+<view class="user_info_wrap">
+    <view wx:if="{{isShowUserName}}" class="user_img_wrap">
+        <view class="user_info">
+            <image class="user_icon" src="{{userInfo.avatarUrl}}"></image>
+            <view class="user_name">{{userInfo.nickName}}</view>
+        </view>
+    </view>
+
+
+    <view wx:else="{{isShowUserName}}" class="user_img_wrap">
+        <view class="user_info">
+            <image class="user_icon" src="../../static/img/image/default_avatarUrl.jfif"></image>
+            <button type="default" bindtap="getUserInformation" style="width: 200rpx;margin-top: 50rpx;">授权登陆</button>
+        </view>
+
+    </view>
+
+</view>
+
+
+
+
+<!-- 条件和出现头像一样，未登录的时候不允许出现icon图标 -->
+<view class="bottom" wx:if="{{isShowUserName}}" style="margin-bottom: 0;">
+
+
+    <navigator wx:if="{{showMap.order_accept  == 1? true:false}}" class="item" url="/pages/accept/accept">
+        <van-icon name="orders-o" size="80rpx" info="{{dotInfo}}" />
+        <text>工单</text>
+    </navigator>
+
+
+    <navigator wx:if="{{showMap.order_create == 1? true:false}}" class="item" url="/pages/create/create">
+        <image src="../../static/img/icon/create.png" alt="" />
+        <text>创建工单</text>
+    </navigator>
+
+    <navigator wx:if="{{showMap.order_divide == 1? true:false}}" class="item" url="/pages/my/my">
+        <image src="../../static/img/icon/dispatch.png" alt="" />
+        <text>工单操作</text>
+    </navigator>
+
+    <navigator wx:if="{{showMap.repair_admin == 1? true:false}}" class="item" url="/pages/repair/repair">
+        <image src="../../static/img/icon/repair.png" alt="" />
+        <text>维修记录</text>
+    </navigator>
+
+    <!-- <navigator class="item" url="/pages/repairInquire/repairInquire">
+        <image src="../../static/img/icon/look_repair.png" alt="" />
+        <text>查看维修</text>
+    </navigator> -->
+</view>
+

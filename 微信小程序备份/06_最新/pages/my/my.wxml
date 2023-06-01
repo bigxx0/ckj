@@ -1,0 +1,128 @@
+<wxs module="handleEvent" src="../../utils/handleFormat.wxs"></wxs>
+
+
+<view>
+    <view class="power">
+        <calendar bind:getMessageFromServer="getMessageFromServer"></calendar>
+    </view>
+    <van-tabs swipeable="true" sticky active="{{active}}" bind:change="tabChange" color="#6eb2f7" title-active-color="#6eb2f7">
+        <van-tab title="待分配">
+            <!-- 这里是待分配页面 -->
+            <!-- 工单单元格开始 -->
+            <!-- wx-if 开始 -->
+            <view wx:if="{{ dataList.length !== 0 && dataList !== null}}" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+
+                <!-- 使用组件来代替冗余信息 -->
+                <tabItem wx:for="{{dataList}}" wx:key="index" item="{{item}}" index="{{index}}" style="position: relative;" bind:initInformation="initInformation">
+                    <!-- 插槽，插入在组件当中 -->
+                    <view slot="button_slot">
+                        <view class="commit"><button class="info" bindtap="gotoDistribute" data-orderId="{{item.orderId}}" data-content="{{item.content}}">分配工单</button></view>
+                        <view class="commit"><button class="del" bindtap="delOrders" data-orderId="{{item.orderId}}">删除工单</button></view>
+
+                    </view>
+                </tabItem>
+
+
+            </view>
+            <!-- wx-if 结束，wx-else开始 -->
+            <view wx:else="{{ dataList.length == 0 || dataList == null}}" class="none_message" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+                <van-empty description="暂无数据">
+                </van-empty>
+            </view>
+            <!-- wx-else结束 -->
+            <!-- 工单单元格结束 -->
+        </van-tab>
+
+
+        <van-tab title="未接受">
+            <!-- 这里是未接受页面 -->
+            <!-- 工单单元格开始 -->
+            <!-- wx-if 开始 -->
+
+            <view wx:if="{{ dataList.length !== 0 && dataList !== null}}" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+
+                <!-- 使用组件来代替冗余信息 -->
+                <tabItem wx:for="{{dataList}}" wx:key="index" item="{{item}}" index="{{index}}" style="position: relative;" bind:initInformation="initInformation">
+                    <!-- 插槽，插入在组件当中 -->
+                    <view slot="button_slot">
+                        <!-- <view class="commit"><button class="info" bindtap="gotoDistribute" data-orderId="{{item.orderId}}" data-content="{{item.content}}">分配工单</button></view> -->
+                    </view>
+                </tabItem>
+
+
+            </view>
+            <!-- wx-if 结束，wx-else开始 -->
+            <view wx:else="{{ dataList.length == 0 || dataList == null}}" class="none_message" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+                <van-empty description="暂无数据">
+                </van-empty>
+            </view>
+            <!-- wx-else结束 -->
+            <!-- 工单单元格结束 -->
+
+
+        </van-tab>
+        <van-tab title="未完成">
+            <!-- 这里是未完成页面 -->
+            <!-- 工单单元格开始 -->
+            <!-- wx-if 开始 -->
+            <view wx:if="{{ dataList.length !== 0 && dataList !== null}}" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+
+                <!-- 使用组件来代替冗余信息 -->
+                <tabItem wx:for="{{dataList}}" wx:key="index" item="{{item}}" index="{{index}}" style="position: relative;" bind:initInformation="initInformation">
+                    <!-- 插槽，插入在组件当中 -->
+                    <view slot="button_slot">
+                        <!-- <view class="commit"><button class="info" bindtap="gotoDistribute" data-orderId="{{item.orderId}}" data-content="{{item.content}}">分配工单</button></view> -->
+                    </view>
+                </tabItem>
+
+
+            </view>
+            <!-- wx-if 结束，wx-else开始 -->
+            <view wx:else="{{ dataList.length == 0 || dataList == null}}" class="none_message" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+                <van-empty description="暂无数据">
+                </van-empty>
+            </view>
+            <!-- wx-else结束 -->
+            <!-- 工单单元格结束 -->
+
+
+        </van-tab>
+
+
+        <van-tab title="已完成">
+            <!-- 这里是已完成页面 -->
+            <!-- 工单单元格开始 -->
+            <!-- wx-if 开始 -->
+
+            <view wx:if="{{ dataList.length !== 0 && dataList !== null}}" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+
+                <!-- 使用组件来代替冗余信息 -->
+                <tabItem wx:for="{{dataList}}" wx:key="index" item="{{item}}" index="{{index}}" style="position: relative;" bind:initInformation="initInformation">
+                    <!-- 插槽，插入在组件当中 -->
+                    <view slot="button_slot">
+                        <view class="commit"><button class="del" bindtap="delOrders" data-orderId="{{item.orderId}}">删除工单</button></view>
+                        <!-- <view class="commit"><button class="info" bindtap="gotoDistribute" data-orderId="{{item.orderId}}" data-content="{{item.content}}">分配工单</button></view> -->
+                    </view>
+                </tabItem>
+
+
+            </view>
+            <!-- wx-if 结束，wx-else开始 -->
+            <view wx:else="{{ dataList.length == 0 || dataList == null}}" class="none_message" style="height:{{handleEvent.windowHeightFormat(windowHeight)}};">
+                <van-empty description="暂无数据">
+                </van-empty>
+            </view>
+            <!-- wx-else结束 -->
+            <!-- 工单单元格结束 -->
+
+        </van-tab>
+    </van-tabs>
+
+
+
+
+
+
+</view>
+<!-- 放一个占位标签 -->
+<view class="standView"></view>

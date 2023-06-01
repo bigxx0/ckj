@@ -1,0 +1,51 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/my/my",
+    "pages/create/create",
+    "pages/distribute/distribute",
+    "pages/accept/accept",
+    "pages/test/test",
+    "pages/customer/customer",
+    "pages/add/add"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#6eb2f7",
+    "navigationBarTitleText": "创科捷",
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh": true   
+  },
+  "usingComponents": {
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+
+    "van-icon": "@vant/weapp/icon/index"
+
+    
+    
+
+  },
+  "sitemapLocation": "sitemap.json",
+
+  "tabBar": {
+      "custom": true,
+      "list": [{
+          "pagePath": "pages/index/index",
+          "text": "首页",
+          "iconPath": "/static/img/icon/home.png",
+          "selectedIconPath": "/static/img/icon/home_active.png"
+      }
+      ,{
+        "pagePath": "pages/my/my",
+        "text": "个人",
+        "iconPath": "/static/img/icon/order.png",
+        "selectedIconPath": "/static/img/icon/order_active.png"
+      }
+    ]
+  }
+}

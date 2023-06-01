@@ -1,0 +1,17 @@
+<van-tabbar active="{{ active }}" bind:change="onChange">
+  <van-tabbar-item wx:for="{{list}}" wx:key="index">    <!--这个标签有info值，info值代表的是tabBat右上角红色的提示信息-->
+  <!-- mode="aspectFit"原本image里面有这一个属性 -->
+    <image
+      slot="icon"
+      src="{{item.iconPath}}"
+      
+      class="icon_tabBar"
+    />
+    <image
+      slot="icon-active"
+      src="{{item.selectedIconPath}}"
+      class="icon_tabBar"
+    />
+    <text class="text_tabBar">{{item.text}}</text>
+  </van-tabbar-item>
+</van-tabbar>

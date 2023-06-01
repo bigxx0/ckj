@@ -1,0 +1,44 @@
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+    <van-datetime-picker type="datetime" value="{{ currentDate }}"  min-date="{{ minDate }}" formatter="{{ formatter }}" bind:cancel="cancelTime" bind:confirm="confirmTime" title="选择时间" item-height="40" />
+</van-popup>
+
+
+<!--pages/repairInquire/repairInquire.wxml-->
+
+
+<view class="contain">
+    <navigator class="contain" url="/pages/customer/customer">
+        <view class="icon" style="border-radius: 15px 0 0 15px;">
+            <image src="../../static/img/icon/search.png" class="search_icon" />
+        </view>
+        <view type="text" class="search_bar" style="line-height: 35px;color: #808080;">请输入搜索内容</view>
+        <view class="icon" style="border-radius: 0 15px 15px 0;"></view>
+    </navigator>
+</view>
+
+
+<view style="height: 40rpx;"></view>
+
+<view class="text_box" wx:if="{{isSearch}}">
+    <text style="font-size: 18px; font-weight: 600;margin-left: 40rpx;">选择时间区间：</text>
+    <input disabled type="text" bindtap="showPopup" placeholder="{{minTime}}" class="text_input" data-type="minTime" />
+    <text class="text_input" style="border: none;margin: 0 auto;">~</text>
+    <input disabled type="text" bindtap="showPopup" placeholder="{{maxTime}}" class="text_input" data-type="maxTime" />
+    <view style="height: 40rpx;"></view>
+    <text style="font-size: 18px; font-weight: 600;margin-left: 40rpx;">维修单状态</text>
+    <view style="height: 60rpx;"></view>
+    <radio-group bindchange="isOrders" style="display: flex;width: 100%; justify-content: space-around;">
+        <!-- background-color:red; -->
+        <radio value="1" color="#6eb2f7" style="margin-left: 50rpx;">已送回</radio>
+        <radio value="0" color="#6eb2f7" style="margin-right: 50rpx;">未送回</radio>
+    </radio-group>
+    <view style="height: 120rpx;"></view>
+    <button bindtap="search">点击查询</button>
+</view>
+
+<view wx:else="{{isSearch}}">
+
+
+
+
+</view>

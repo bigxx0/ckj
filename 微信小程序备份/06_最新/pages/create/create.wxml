@@ -1,0 +1,80 @@
+<!--pages/create/create.wxml-->
+
+<view style="width: 100%;height: 20px;"></view> <!--占位符-->
+
+
+<view class="main" style="border-radius: 10px;" bindtap="gotoAdd">
+
+    <view class="head" wx:if="{{customerInfo.showCustomer}}">
+        <image src="../../static/img/icon/address-book.png" mode="" class="head_icon" />
+        <text>请先选择客户信息</text>
+        <image src="../../static/img/icon/arrow-right.png" mode="" class="arrow_icon" />
+    </view>
+    <!-- 用wx：if判断的地方 -->
+    <view class="head" wx:else="{{customerInfo.showCustomer}}">
+        <image src="../../static/img/icon/address-book.png" mode="" class="head_icon" />
+            <view style="display: flex;flex-direction: column;">
+                <view style="display: flex;align-items: center;">
+                    <text style="font-size: 14px;" >{{customerInfo.contactMan}}</text>
+                    <text style="font-size: 14px;" >{{customerInfo.customerName}}</text>
+                </view>
+            </view>
+    </view>
+
+</view>
+
+<view style="width: 100%;height: 20px;"></view> <!--占位符-->
+
+
+<view class="main" style="border-radius: 10px 10px 0 0;">
+    <view class="left_one">
+        <text style="font-size: 16px;font-weight: 1000;color: #000;">信息</text>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>报修内容</text>
+    </view>
+    <view class="right_one">
+        
+        <input type="text" placeholder="请输入报修内容" value="{{orderInfo.content}}" bindinput="onInputInfo" data-params = "content"/>
+
+    </view>
+</view>
+<view class="main">
+    <view class="left_one_seleTime">
+        <text>维修时间</text>
+    </view>
+    <view class="right_one seleTime" style="text-align: center;">
+        <van-cell is-link bind:click="showPopup">{{msg}}</van-cell>
+    </view>
+</view>
+
+
+<view class="main">
+    <view class="left_one">
+        <text>备注</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入备注" value="{{orderInfo.detail}}" bindinput="onInputInfo" data-params = "detail"/>
+    </view>
+</view>
+
+<button type="primary" class='btn' bindtap="commit_btn">提交</button>
+
+
+
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+  <van-datetime-picker
+  type="datetime"
+  value="{{ currentDate }}"
+  bind:input="onInput"
+  min-date="{{ minDate }}"
+  formatter="{{ formatter }}"
+  bind:cancel="cancelTime"
+  bind:confirm="confirmTime"
+  title="选择时间"
+  item-height="40"
+/>
+</van-popup>
+

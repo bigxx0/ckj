@@ -1,0 +1,47 @@
+/* pages/my/my.wxss */
+.standView{
+    width: 100%;
+    height: 150rpx;     /*  自定义一下需要的高度 */
+    /* background-color: black; */
+  }
+.power
+{
+    z-index: 999;
+    /* position: relative; */
+}
+
+page{
+    height: 100%;
+}
+
+
+.commit{
+    height: 40px;
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+    text-align: center;
+}
+
+.info{
+    color: #fff;
+    background-color:#1989fa;
+    font-size: 14px;
+    height: 44px;
+    width: 88px;
+    padding: 0 15px;
+    line-height: 44px;
+    border-radius: 20px;
+    margin-right: 100px;
+}
+
+.del{
+    color: #fff;
+    background-color:#ee0a24;
+    font-size: 14px;
+    height: 44px;
+    width: 88px;
+    padding: 0 15px;
+    line-height: 44px;
+    border-radius: 20px;
+}

@@ -1,0 +1,73 @@
+<!--pages/add/add.wxml-->
+<view class="contain">
+  <navigator class="contain" url="/pages/customer/customer">
+      <view class="icon" style="border-radius: 15px 0 0 15px;">
+        <image src="../../static/img/icon/search.png" class="search_icon" />
+      </view>
+      <view type="text" class="search_bar" style="line-height: 35px;color: #808080;">请输入搜索内容</view> 
+      <view class="icon" style="border-radius: 0 15px 15px 0;"></view>
+  </navigator>
+</view>
+
+<view style="height: 40px;"></view>
+
+<view class="main" style="border-radius: 10px 10px 0 0;">
+    <view class="title">
+        <text style="font-size: 16px;font-weight: 1000;color: #000;margin-left: 20px;">信息</text>
+        <text style="font-size: 14px;color: #000;margin-right: 30px;"><text style="color: red;">*</text>为选填项</text>
+    </view>
+</view>
+<!-- 地点开始 -->
+<view class="main">
+    <view class="left_one">
+        <text>企业名称</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入企业名称" value="{{orderInfo.customerName}}" bindinput="onInputInfo" data-params = "customerName"/>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text>联系人</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入联系人名字" value="{{orderInfo.contactMan}}" bindinput="onInputInfo" data-params = "contactMan"/>
+    </view>
+</view>
+<view class="main">
+    <view class="left_one">
+        <text><text style="color: red;">*</text>联系电话</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入联系人电话" value="{{orderInfo.phone}}" bindinput="onInputInfo" data-params = "phone"/>
+    </view>
+</view>
+
+<view class="main">
+    <view class="left_one">
+        <text><text style="color: red;">*</text>地点</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入地点" value="{{orderInfo.address}}" bindinput="onInputInfo" data-params = "address"/>
+    </view>
+</view>
+
+
+<view class="main">
+    <view class="left_one">
+        <text><text style="color: red;">*</text>部门</text>
+    </view>
+    <view class="right_one">
+        <input type="text" placeholder="请输入部门" value="{{orderInfo.department}}" bindinput="onInputInfo" data-params = "department"/>
+    </view>
+</view>
+
+
+
+
+
+
+<button type="primary" class='btn' bindtap="save_btn">保存</button>
+
+<!-- 联系电话结束 -->
+

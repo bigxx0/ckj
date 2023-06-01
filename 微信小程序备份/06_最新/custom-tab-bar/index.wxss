@@ -1,0 +1,9 @@
+/* custom-tab-bar/index.wxss */
+.van-tabbar-item__icon{margin: 0;}
+.icon_tabBar{
+    width: 30px; 
+    height: 28px;
+}
+.text_tabBar{
+    padding: 0;
+}

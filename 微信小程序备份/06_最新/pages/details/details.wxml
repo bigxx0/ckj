@@ -1,0 +1,68 @@
+<!--pages/details/details.wxml-->
+<view style="height: 50px;"></view>
+<view class="main" style="border-radius: 10px 10px 0 0;">
+    <view class="title">
+        <text style="font-size: 16px;font-weight: 1000;color: #000;margin-left: 20px;">工单详情信息</text>
+        <text style="font-size: 14px;color: #000;margin-right: 30px;"><text style="color: red;">*</text>为选填项</text>
+    </view>
+</view>
+<!-- 地点开始 -->
+
+<view class="main_item" style="height: auto;">
+    <view class="text_main">
+        <text class="text_title">开始时间</text>
+        <input disabled class="text_input" type="text" placeholder = "{{begin}}" bindtap="showPopup" data-type = "beginTime" />
+        <button class="get_time" bindtap="getCurrentTime" data-type="beginTime">获取当前时间</button>
+    </view>
+
+    <view class="text_main">
+        <text class="text_title">结束时间</text>
+        <input disabled class="text_input" type="text" placeholder = "{{end}}" bindtap="showPopup" data-type = "endTime" />
+        <button class="get_time" bindtap="getCurrentTime" data-type="endTime">获取当前时间</button>
+    </view>
+
+    <view class="textarea_main">
+        <text style="font-size: 16px;font-weight: 1000;color: #000;margin-left: 10px;"><text style="color: red;">*</text>备注</text>
+        <textarea value="" class="text_area" bindinput="getTextArea"  />
+        
+    </view>
+
+
+<radio-group bindchange="isOrders" style="display: flex;width: 100%; justify-content: space-around;">
+    <!-- background-color:red; -->
+    <text>是否有单？</text>
+
+    <radio value="1" color="#6eb2f7" style="margin-right: 100rpx;">有单</radio>
+    <radio value="0" color="#6eb2f7" style="margin-right: 100rpx;">无单</radio>
+</radio-group>
+
+
+
+
+
+    <button  class='btn {{isClick ? "active":""}}'  
+    bindtouchstart="mouseClick" 
+    bindtouchend="mouseMove"
+    bindtap="commit"
+    >提交</button>
+    <view style="height: 200px;"></view>
+</view>
+
+
+
+
+
+
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+  <van-datetime-picker
+  type="datetime"
+  value="{{ currentDate }}"
+  bind:input="onInput"
+  min-date="{{ minDate }}"
+  formatter="{{ formatter }}"
+  bind:cancel="cancelTime"
+  bind:confirm="confirmTime"
+  title="选择时间"
+  item-height="40"
+/>
+</van-popup>

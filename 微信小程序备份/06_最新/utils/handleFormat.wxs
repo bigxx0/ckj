@@ -1,0 +1,36 @@
+var handleEvent = {
+    nameFormat: function (name){
+        return name.length == 2 ? name:name.slice(-2)
+  },
+    statusFormat:function(status){
+        switch(status){
+            case 0:
+                return "未分配"
+            case 1:
+                return "未接受"
+            case 2:
+                return "进行中"
+            case 3:
+                return "已完成"
+        }
+    },
+    windowHeightFormat:function(windowHeight){
+
+        var windowHeight = windowHeight - 169
+
+        return windowHeight + 'px'
+    },
+    windowHeightFormatWithoutCalendar:function(windowHeight){
+
+        var windowHeight = windowHeight - 119
+
+        return windowHeight + 'px'
+    }
+
+  }
+  module.exports = {
+    nameFormat: handleEvent.nameFormat,
+    statusFormat:handleEvent.statusFormat,
+    windowHeightFormat:handleEvent.windowHeightFormat
+  }
+
