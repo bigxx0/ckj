@@ -21,28 +21,23 @@
     <div class="mid">
       <div class="item">创建时间</div>
       <div class="item">客户公司</div>
-      <!-- <div class="item">联系人</div>
-      <div class="item">电话</div> -->
       <div class="item">意愿</div>
-      <div class="item">备注</div>
       <div class="item">结果</div>
       <div class="item">负责人</div>
       <div class="item">操作</div>
     </div>
 
-    <div v-for="(item, index) in currentList" :key="index">
+    <div v-for="(item, index) in messageList" :key="index">
       <ul class="ulList">
-        <li class="ilList">2020/12/25 12:25:20 </li>
-        <!-- <li class="ilList">{{ item.customerName }} </li> -->
+        <li class="ilList">{{ item.createTime }}</li>
         <li class="ilList">{{ item.customerName }}</li>
-        <li class="ilList">{{ item.content }}</li>
-        <li class="ilList">{{ item.address }}</li>
+        <li class="ilList">{{ item.desire }}</li>
         <li class="ilList">
           <div><el-icon>
               <CollectionTag :class="iconClass(item)" />
             </el-icon></div>{{ item.status }}
         </li>
-        <li class="ilList">{{ item.worker ? item.worker : "未分配！" }}</li>
+        <li class="ilList">{{ item.contactMan }}</li>
         <li class="ilList">
           <ul class="edit">
             <div>
@@ -73,13 +68,11 @@
       </ul>
     </div>
 
-
     <br>
 
     <!-- 分页功能 -->
     <div class="pages">
-      <el-pagination background layout="prev, pager, next" :current-page="currentPage" :page-size="pageSize"
-        :total="total" @current-change="handleCurrentChange" />
+      <el-pagination background layout="prev, pager, next" :total="total" @current-change="handleCurrentChange" @prev-click="handlePrevClick" @next-click="handleNextClick" />
     </div>
 
   </div>
@@ -92,107 +85,57 @@ import { ElNotification } from 'element-plus'
 export default {
   data() {
     return {
-      currentPage: 1,
-      pageSize: 10,
-      userId: '',
-      userName: '',
-      departMent: '',
-      workerList: [],
-      orderId: '',
-      status: '',
-      employeeId: '',
-      // messageList: [
-      //     { id: 1, date: '2022.05.21 12:23', administrator: "小芸", content: "维修打印机维修打印机印机维修打印机", address: "江门市蓬江区凤湾里11栋1层", state: "未分配", status: "status1" },
-      //     { id: 2, date: '2023.05.21 12:23', administrator: "小芸1", content: "111维修打印机维修打印机印机维修打印机", address: "111江门市蓬江区凤湾里11栋1层", state: "未接受", status: "status2" },
-      //     { id: 3, date: '2024.05.21 12:23', administrator: "小芸2", content: "222维修打印机维修打印机印机维修打印机", address: "222江门市蓬江区凤湾里11栋1层", state: "进行中", status: "status3" },
-      //     { id: 4, date: '2025.05.21 12:23', administrator: "小芸3", content: "333维修打印机维修打印机印机维修打印机", address: "3333江门市蓬江区凤湾里11栋1层", state: "已完成", status: "status4" },
-      // ],
       messageList: [],
     };
   },
   async created() {
     this.dataInit()
   },
-  computed: {
-    currentList() {
-      // start表示当前页之前的所有页占据的数据量,因为数组索引从0开始，所以减一
-      const start = (this.currentPage - 1) * this.pageSize
-      // 表示从 start 开始，往后截取 this.pageSize 个数据，即本页显示的数据量
-      const end = start + this.pageSize
-      // 分割数组的数据,从而在页面上呈现本页显示的数据列表。
-      return this.messageList.slice(start, end)
-      // 获取需要回到顶部的元素
-    },
-  },
+
   methods: {
     // 初始化数据
     async dataInit() {
-      const res = await request('post', '/dispatch/order/getDivideOrderList', { status: -1, type: 0 });
-      res.data.data.forEach((item, index) => {
+      const res = await request('post', '/dispatch/business/list-condition', { pageNumber: this.pageNumber, pageSize: '' });
+      res.data.data.list.forEach((item, index) => {
         switch (item.status) {
           case 0:
-            item.status = "未分配"
+            item.status = "沟通中"
             break
           case 1:
-            item.status = "未接受"
+            item.status = "已转化"
             break
           case 2:
-            item.status = "进行中"
-            break
-          case 3:
-            item.status = "已完成"
+            item.status = "丢弃"
             break
         }
       });
-      this.messageList = res.data.data;
-      this.total = res.data.data.length;
+      this.messageList = res.data.data.list;
+      this.total = res.data.data.total
+      // console.log( this.total )
+      // console.log( this.messageList)
     },
 
     iconClass(item) {
-      if (item.status === '未分配') {
+      if (item.status === '沟通中') {
         return 'status1';
-      } else if (item.status === '未接受') {
+      } else if (item.status === '已转化') {
         return 'status2';
-      } else if (item.status === '进行中') {
+      } else if (item.status === '丢弃') {
         return 'status3';
-      } else if (item.status === '已完成') {
-        return 'status4';
-      }
+      } 
     },
 
-    // 分页功能
-    handleCurrentChange(val) {
-      // console.log(`当前页码：${val}`)
-      // 根据新的页码重新获取对应页的数据，并更新到 currentList 中
-      this.currentPage = val;
-      let el = document.getElementsByClassName('.heading');
-      // console.log(el)
-      // 将滚动位置设置为 0
-      el.scrollTop = 0;
+    handleCurrentChange(page) {
+      this.pageNumber = page
+      this.dataInit()
     },
-
-    // 请求员工数据列表
-    async onSearch(orderId, status) {
-      this.orderId = orderId
-      this.status = status
-      const res = await request('get', '/dispatch/user/getUserList',);
-      this.workerList = res.data.data;
+    handlePrevClick() {
+      this.pageNumber = this.pageNumber 
+      this.dataInit()
     },
-
-    // 分配
-    async onChangestate(item) {
-      const Id = item.id
-      const orderId = this.orderId
-      const status = this.status
-      const res = await request('put', '/dispatch/order/divide/' + orderId + '/' + Id,);
-      if (status != '未分配') {
-        console.log(status)
-        this.errorDiv()
-      }
-      else if (res.data.code == 200) {
-        this.successDiv()
-        this.dataInit()
-      }
+    handleNextClick() {
+      this.pageNumber = this.pageNumber 
+      this.dataInit()
     },
 
     // 删除
@@ -205,20 +148,6 @@ export default {
       }
     },
 
-    // 修改
-    async ongdChange(item) {
-      console.log(item)
-      // localStorage只支持存储字符串类型的数据，如果需要存储对象类型的数据，则需要将其先序列化为JSON字符串，再存储到localStorage中，取出时再反序列化为对象。
-      localStorage.setItem('gdInfo', JSON.stringify({
-        orderId: item.orderId,
-        customerName: item.customerName,
-        customerId: item.customerId,
-        content: item.content,
-        taskTime: item.taskTime,
-        detail: item.detail,
-      }))
-      // console.log("localStorage:", localStorage);
-    },
 
     // 路由组件传参
     toComponentTwo(index) {
@@ -231,20 +160,6 @@ export default {
       })
     },
 
-    successDiv() {
-      ElNotification({
-        title: 'Success',
-        message: '分配成功',
-        type: 'success',
-      })
-    },
-    errorDiv() {
-      ElNotification({
-        title: 'Error',
-        message: '分配失败',
-        type: 'error',
-      })
-    },
     successDel() {
       ElNotification({
         title: 'Success',
@@ -418,21 +333,14 @@ export default {
   width: 28px;
   height: auto;
   vertical-align: middle;
-  color: yellow;
-}
-
-.status4 {
-  width: 28px;
-  height: auto;
-  vertical-align: middle;
   color: blue;
 }
+
 
 .pages {
   display: flex;
   justify-content: center;
-  margin: 30px;
-  /* transform: translateY(250px); */
+  margin: 30px; 
   z-index: 999;
 }
 </style>
