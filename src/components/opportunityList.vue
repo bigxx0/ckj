@@ -143,15 +143,15 @@ export default {
       this.dataInit()
     },
 
-    // 删除
-    async onDelete(orderId) {
-      const res = await request('delete', '/dispatch/', { orderId });
-      if (res.data.code == 200) {
-        this.successDel()
-        this.dataInit()
-        return true;
-      }
-    },
+    // // 删除
+    // async onDelete(orderId) {
+    //   const res = await request('delete', '/dispatch/', { orderId });
+    //   if (res.data.code == 200) {
+    //     this.successDel()
+    //     this.dataInit()
+    //     return true;
+    //   }
+    // },
 
 
     // 路由组件传参
