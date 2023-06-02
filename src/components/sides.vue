@@ -61,9 +61,9 @@
               <router-link to="/OpportunityList">
                 <li @click="changeActiveIndex(0, 1)" :class="{ bcli: activeIndex1_il === 0 }">商机列表</li>
               </router-link>
-              <router-link to="/OpDetalis">
+              <!-- <router-link to="/OpDetalis">
                 <li @click="changeActiveIndex(1, 1)" :class="{ bcli: activeIndex1_il === 1 }">商机详情</li>
-              </router-link>
+              </router-link> -->
               <!-- <router-link to="create">
                 <li @click="lishow1(2)" :class="{ bcli: activeIndex1_il === 2 }">新建工单</li>
               </router-link>
@@ -452,9 +452,9 @@ export default {
   font-weight: 600;
 }
 
-.bcli {
+/* .bcli {
   color: #63a2ff;
-}
+} */
 
 
 ul {

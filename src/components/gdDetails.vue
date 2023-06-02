@@ -42,8 +42,7 @@ export default {
         // const index = this.$route.params.index;
         let index = this.$route.query.index
         this.gdDetail_Show(index)
-        console.log(this.index);
-
+        // console.log(this.index);
     },
     methods: {
         async gdDetail_Show(index) {

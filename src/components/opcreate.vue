@@ -19,6 +19,9 @@
         <el-form-item class="title" label="意愿:">
           <el-input v-model="desire" placeholder="输入意愿" clearable />
         </el-form-item>
+        <el-form-item class="title" label="负责人:">
+          <el-input v-model="worker" placeholder="输入负责人" clearable />
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submit()">创建</el-button>
           <router-link to="/opportunityList">
@@ -43,30 +46,36 @@ export default {
       contactMan: "",
       phone: "",
       desire: "",
+      worker: "",
     };
   },
   methods: {
     // 创建商机
     async submit() {
-      // console.log('submit!')
-      const res = await request("post", "/dispatch/business/add", {
+      const data = {
         customerName: this.customerName,
         contactMan: this.contactMan,
         phone: this.phone,
         desire: this.desire,
-      });
-      console.log(data);
+        worker: this.worker,
+      };
+      const res = await request("post", "/dispatch/business/add", data);
       if (res.data.code == 200) {
         this.success();
-        // // 清空输入框、
-        this.customerName = "";
-        this.contactMan = "";
-        this.phone = "";
-        this.desire = "";
+        this.empty();
       } else {
         // console.log("错")
         this.error();
       }
+    },
+
+    empty() {
+      // 清空输入框
+      this.customerName = "";
+      this.contactMan = "";
+      this.phone = "";
+      this.desire = "";
+      this.worker = "";
     },
 
     success() {

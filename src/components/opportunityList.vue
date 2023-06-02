@@ -125,28 +125,33 @@ export default {
       } 
     },
 
+    // 点击页数翻页
     handleCurrentChange(page) {
       this.pageNumber = page
       this.dataInit()
     },
+
+    // 点击前进翻页
     handlePrevClick() {
       this.pageNumber = this.pageNumber 
       this.dataInit()
     },
+
+    // 点击后退翻页
     handleNextClick() {
       this.pageNumber = this.pageNumber 
       this.dataInit()
     },
 
-    // 删除
-    async onDelete(orderId) {
-      const res = await request('delete', '/dispatch/order/remove', { orderId });
-      if (res.data.code == 200) {
-        this.successDel()
-        this.dataInit()
-        return true;
-      }
-    },
+    // // 删除
+    // async onDelete(orderId) {
+    //   const res = await request('delete', '/dispatch/order/remove', { orderId });
+    //   if (res.data.code == 200) {
+    //     this.successDel()
+    //     this.dataInit()
+    //     return true;
+    //   }
+    // },
 
 
     // 路由组件传参

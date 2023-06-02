@@ -249,6 +249,7 @@ export default {
                     index: index
                 }
             })
+            console.log(index)
         },
 
         successDiv() {
