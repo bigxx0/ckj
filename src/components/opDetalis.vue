@@ -181,28 +181,18 @@ export default {
     };
   },
   created() {
-    let index = this.$route.query.index;
-    this.opDetail_Show(index);
+    let index = JSON.parse(this.$route.query.index);
+    this.opDetails = index;
+    this.customerName = index.customerName;
+    this.contactMan = index.contactMan;
+    this.phone = index.phone;
+    this.desire = index.desire;
+    this.createTime = index.createTime;
+    this.status = index.status;
+    this.worker = index.worker;
+    console.log(this.opDetails);
   },
   methods: {
-    async opDetail_Show(index) {
-      const res = await request("post", "/dispatch/business/list-condition", {
-        pageNumber: "",
-        pageSize: "",
-      });
-      //   this.opDetails = res.data.data.list[index];
-      this.customerName = res.data.data.list[index].customerName;
-      this.contactMan = res.data.data.list[index].contactMan;
-      this.phone = res.data.data.list[index].phone;
-      this.desire = res.data.data.list[index].desire;
-      this.createTime = res.data.data.list[index].createTime;
-      this.status = res.data.data.list[index].status;
-      this.worker = res.data.data.list[index].worker;
-      //   console.log(this.opDetails);
-      this.id = res.data.data.list[index].id;
-      //   console.log(this.id);
-    },
-
     // ### 6.3 商机丢弃
     async discard() {
       const Id = this.id;
@@ -214,7 +204,7 @@ export default {
 
     // 点击气泡确认丢弃
     confirmEvent() {
-        this.discard()
+      this.discard();
     },
 
     successDiscard() {

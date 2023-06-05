@@ -22,7 +22,24 @@
       <div class="item">创建时间</div>
       <div class="item">客户公司</div>
       <div class="item">意愿</div>
-      <div class="item">结果</div>
+      <div class="item">结果
+         <!-- 下拉筛选状态 -->
+         <el-dropdown trigger="click">
+          <div class="el-dropdown-link" >
+            <div>
+                <svg t="1685778316978" class="icon iconArrow" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2967" width="200" height="200"><path d="M718.73545078 589.39849389H305.26454922c-20.36802471 0-32.58883953 13.23921607-22.40482717 23.42322842 15.27601854 16.29441978 197.56983966 206.73545078 206.73545077 215.90106188 11.20241359 12.22081482 35.64404324 10.18401235 45.8280556 0C542.55203706 821.59397555 729.93786436 624.02413589 741.14027795 612.82172231c10.18401235-11.20241359-3.05520371-22.40482718-22.40482718-23.42322842zM305.26454922 434.60150611h413.47090156c19.34962348 0 32.58883953-12.22081482 22.40482717-23.42322842-11.20241359-11.20241359-198.5882409-208.77225325-206.73545077-216.91946312-9.16561112-10.18401235-33.60724077-11.20241359-45.8280556 0C480.42956171 204.44282693 298.13574057 394.88385793 282.85972205 411.17827769c-10.18401235 10.18401235 2.03680247 23.42322842 22.40482718 23.42322842z" fill="#bfbfbf" p-id="2968"></path></svg>
+            </div>
+          </div>
+            <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="Initstatus( status = '' )"> 全 部 </el-dropdown-item>
+              <el-dropdown-item @click="Initstatus( status = 0 )">沟通中</el-dropdown-item>
+              <el-dropdown-item @click="Initstatus( status = 1 )">已转化</el-dropdown-item>
+              <el-dropdown-item @click="Initstatus( status = 2 )">丢弃</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown> 
+      </div>
       <div class="item">负责人</div>
       <div class="item">操作</div>
     </div>
@@ -59,7 +76,7 @@
             <div>
               <el-dropdown>
                 <div class="el-dropdown-link">
-                  <li class="edit-li" @click="toComponentTwo(index)">详情</li>
+                  <li class="edit-li" @click="toComponentTwo(item)">详情</li>
                 </div>
               </el-dropdown>
             </div>
@@ -111,8 +128,26 @@ export default {
       });
       this.messageList = res.data.data.list;
       this.total = res.data.data.total
-      // console.log( this.total )
-      // console.log( this.messageList)
+    },
+
+    // 筛选状态
+    async Initstatus(status) {
+      const res = await request('post', '/dispatch/business/list-condition', { pageNumber: this.pageNumber, pageSize: '',status});
+      res.data.data.list.forEach((item, index) => {
+        switch (item.status) {
+          case 0:
+            item.status = "沟通中"
+            break
+          case 1:
+            item.status = "已转化"
+            break
+          case 2:
+            item.status = "丢弃"
+            break
+        }
+      });
+      this.messageList = res.data.data.list;
+      this.total = res.data.data.total
     },
 
     iconClass(item) {
@@ -155,12 +190,12 @@ export default {
 
 
     // 路由组件传参
-    toComponentTwo(index) {
+    toComponentTwo(item) {
       // 跳转到组件二，将 index 值作为参数传递
       this.$router.push({
         path: '/opDetalis',
         query: {
-          index: index
+          index: JSON.stringify(item)
         }
       })
     },
@@ -237,6 +272,14 @@ export default {
   position: relative;
   top: 10%;
   /* background-color: red; */
+}
+
+.iconArrow{
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
+  position: absolute;
+  top: 12%; 
 }
 
 .mid {

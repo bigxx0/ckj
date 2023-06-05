@@ -6,40 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
     </head>
-    <body></body>
+    <body>
+        
+    </body>
 
     <script>
 
-        // // 一、解构赋值
-        // const person = {
-        //     firstName: 'John',
-        //     lastName: 'Doe',
-        //     age: 25
-        // };
+        // 一、解构赋值
+        const person = {
+            firstName: 'John',
+            lastName: 'Doe',
+            age: 25
+        };
 
-        // const {firstName, age} = person;
+        const {firstName, age} = person;
 
-        // console.log(firstName); // 'John'
-        // console.log(age); // 25
-        // console.log(person.lastName); // 'Doe'
+        console.log(firstName); // 'John'
+        console.log(age); // 25
+        console.log(person.lastName); // 'Doe'
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        // // 二、Set是一种类似数组的数据结构，其中每个元素都是唯一的，即不能重复。可以使用Set来过滤重复的值，并且对于查找和删除操作，Set相比于数组会更加高效。
-        // let set1 = [
-        //     1,
-        //     2,
-        //     3,
-        //     2,
-        //     4
-        // ]
-        // set2 = new Set(set1);
-        // set2.add(5)
-        // set2.delete(1)
-        // console.log(set2);
+        // 二、Set是一种类似数组的数据结构，其中每个元素都是唯一的，即不能重复。可以使用Set来过滤重复的值，并且对于查找和删除操作，Set相比于数组会更加高效。
+        let set1 = [
+            1,
+            2,
+            3,
+            2,
+            4
+        ]
+        set2 = new Set(set1);
+        set2.add(5)
+        set2.delete(1)
+        console.log(set2);
 
-        // console.log(set1.has(3)); // true
-        // console.log(set1.has(2)); // false
+        console.log(set1.has(3)); // true
+        console.log(set1.has(2)); // false
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 

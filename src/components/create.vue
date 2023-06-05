@@ -101,7 +101,8 @@ export default {
 
     // 请求客户数据列表
     async onSearch() {
-      const res = await request('post', '/dispatch/customer/getCustomerList', {})
+      const customerName = this.customerName
+      const res = await request('post', '/dispatch/customer/getCustomerList', { customerName })
       this.customerList = res.data.data;
     },
 

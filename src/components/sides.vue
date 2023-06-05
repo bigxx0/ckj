@@ -2,7 +2,7 @@
   <div id="sides" class="container">
     <div class="left">
       <button class="btn">点击了解</button>
-      <div class="zanwei">小程序管理后台</div>
+      <div class="zanwei">创科捷管理系统</div>
       <div>
         <!-- 工单中心 -->
         <ul>
@@ -95,9 +95,9 @@
               <router-link to="/OpportunityList">
                 <li @click="changeActiveIndex(0, 2)" :class="{ bcli: activeIndex2_il === 0 }">项目列表</li>
               </router-link>
-              <router-link to="/OpDetalis">
+              <!-- <router-link to="/OpDetalis">
                 <li @click="changeActiveIndex(1, 2)" :class="{ bcli: activeIndex2_il === 1 }">项目详情</li>
-              </router-link>
+              </router-link> -->
               <!-- <router-link to="create">
                 <li @click="lishow1(2)" :class="{ bcli: activeIndex1_il === 2 }">新建工单</li>
               </router-link>
