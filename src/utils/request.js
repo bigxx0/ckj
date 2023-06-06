@@ -34,14 +34,17 @@ axios.interceptors.response.use(
 
 // 封装方法
 async function request(method, url, data) {
-    // try {
+    try {
       const response = await axios({
         method: method,
         url: 'http://182.43.58.52:9001' + url,
         data: data,
       });
       return response
+    } catch (error) {
+      return error
     }
+  }
 
 // 导出封装后的 request 模块
 export default request

@@ -64,9 +64,11 @@
         >
           <el-form-item class="title" label="意愿变化:" style="width: 50%">
             <el-input
-              v-model="change"
+              v-model="desireChange"
               placeholder="请输入意愿变化"
               style="width: 60%"
+              autosize
+              type="textarea"
             />
           </el-form-item>
           <el-form-item class="title" label="沟通目标:" style="width: 50%">
@@ -74,6 +76,8 @@
               v-model="target"
               placeholder="请输入沟通目标"
               style="width: 60%"
+              autosize
+              type="textarea"
             />
           </el-form-item>
           <el-form-item class="title" label="结果:" style="width: 50%">
@@ -81,12 +85,13 @@
               v-model="result"
               placeholder="请输入结果"
               style="width: 60%"
+              autosize
+              type="textarea"
             />
           </el-form-item>
           <el-form-item class="title" label="备注:" style="width: 80%">
             <el-input
-              v-model="notes"
-              :rows="3"
+              v-model="detail"
               type="textarea"
               autosize
               placeholder="请输入备注"
@@ -97,8 +102,8 @@
       </div>
       <br />
       <div class="left-down">
-        <el-button>提交</el-button>
-        <el-button>转化</el-button>
+        <el-button @click="add">提交</el-button>
+        <el-button @click="transform">转化</el-button>
         <el-popconfirm
           width="200"
           confirm-button-text="确定"
@@ -119,15 +124,16 @@
     </div>
     <div class="right">
       <h2>沟通记录</h2>
-      <el-button type="primary" @click="dialogTableVisible = true">
+      <el-button type="primary" @click="search(), (dialogTableVisible = true)">
         查看沟通记录
       </el-button>
       <el-dialog v-model="dialogTableVisible" title="沟通历史记录">
-        <el-table :data="gridData">
-          <el-table-column property="change" label="意愿变化" width="150" />
+        <el-table :data="opMessage">
+          <el-table-column property="recordTime" label="创建时间" width="200" />
+          <el-table-column property="desireChange" label="意愿变化" />
           <el-table-column property="target" label="沟通目标" />
           <el-table-column property="result" label="结果" />
-          <el-table-column property="notes" label="备注" />
+          <el-table-column property="detail" label="备注" />
         </el-table>
       </el-dialog>
       <br />
@@ -152,54 +158,34 @@ export default {
       createTime: "",
       id: "",
       dialogTableVisible: false,
-      gridData: [
-        {
-          change: "吃饭",
-          result: "已完成",
-          target: "睡觉",
-          notes: "呃呃",
-        },
-        {
-          change: "吃饭",
-          result: "已完成",
-          target: "睡觉",
-          notes: "呃呃",
-        },
-        {
-          change: "吃饭",
-          result: "已完成",
-          target: "睡觉",
-          notes: "呃呃",
-        },
-        {
-          change: "吃饭",
-          result: "已完成",
-          target: "睡觉",
-          notes: "呃呃",
-        },
-      ],
+      opMessage: [],
     };
   },
   created() {
-    let index = JSON.parse(this.$route.query.index);
-    this.opDetails = index;
-    this.customerName = index.customerName;
-    this.contactMan = index.contactMan;
-    this.phone = index.phone;
-    this.desire = index.desire;
-    this.createTime = index.createTime;
-    this.status = index.status;
-    this.worker = index.worker;
-    console.log(this.opDetails);
+    // 初始化数据
+    this.parseData()
+    // 查看沟通记录   
+    this.search();
   },
+
   methods: {
+    // 初始化数据
+    parseData(){
+      let indexObj = JSON.parse(this.$route.query.index);
+      this.opDetails = indexObj;
+      for(let key in indexObj) {
+        if(indexObj.hasOwnProperty(key)) { // 确认属性是否属于自身（非继承）
+          this[key] = indexObj[key];
+          // console.log(key)
+    }}
+    // console.log( "1",this.opDetails)
+    },
+
     // ### 6.3 商机丢弃
     async discard() {
       const Id = this.id;
-      const res = await request("put", "/dispatch/business/abandon?id=" + Id, {
-        Id,
-      });
-      res.code == 200 ? this.successDiscard() : this.successDiscard();
+      const res = await request("put", "/dispatch/business/abandon?id=" + Id);
+      res.data.code == 200 ? this.success() : this.error();
     },
 
     // 点击气泡确认丢弃
@@ -207,18 +193,59 @@ export default {
       this.discard();
     },
 
-    successDiscard() {
+    // 商机提交
+    async add() {
+      const data = {
+        id: this.id,
+        customerName: this.customerName,
+        target: this.target,
+        desireChange: this.desireChange,
+        result: this.result,
+        detail: this.detail,
+      };
+      const res = await request("post", "/dispatch/business/submit", data);
+      res.data.code == 200 ? this.success() : this.error();
+    },
+
+    // 商机转换
+    async transform() {
+      const data = {
+        businessId: this.id,
+        customerName: this.customerName,
+        contactMan: this.contactMan,
+        phone: this.phone,
+        content: this.desire,
+      };
+      const res = await request("post", "/dispatch/business/transform", data);
+      res.data.code == 200 ? this.success() : this.error();
+    },
+
+    // 查看沟通记录
+    async search() {
+      const data = {
+        businessId: this.id,
+      };
+      const res = await request(
+        "get",
+        "/dispatch/business/recordList?businessId=" + this.id,
+        data
+      );
+      this.opMessage = res.data.data;
+      // console.log(this.opMessage);
+    },
+
+    success() {
       ElNotification({
         title: "Success",
-        message: "丢弃成功",
+        message: "操作成功",
         type: "success",
       });
     },
 
-    errorDiscard() {
+    error() {
       ElNotification({
         title: "Error",
-        message: "丢弃失败",
+        message: "操作失败",
         type: "error",
       });
     },
