@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "./src/components/home.vue";
 import GdList from "./src/components/gdList.vue";
 import Create from "./src/components/create.vue";
 import Customer from "./src/components/customer.vue";
@@ -14,7 +13,7 @@ import Opcreate from "./src/components/opcreate.vue";
 const routes = [
   {
     path: "/",
-    component: Home,
+    component: Login,
   },
   {
     path: "/create",
@@ -76,7 +75,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isLogin = localStorage.getItem("token") ? true : false; // 通过判断本地是否存在 token 判断用户是否登录
-  // console.log(isLogin)
   if (to.path == "/login") {
     // 若当前访问的是登录页面，则直接放行
     next();
@@ -88,3 +86,4 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router;
+ 

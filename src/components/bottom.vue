@@ -20,10 +20,9 @@ body {
 }
 
 .banquan {
-    width: 100%;
+    width: 98%;
     height: 50px;
     line-height: 50px;
     text-align: center;
-    transform: translateY(250px);
 }
 </style>

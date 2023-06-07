@@ -49,11 +49,11 @@ export default {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  width: 80%;
+  width: 98%;
   align-content: center;
   align-items: flex-start;
   /* background-color: red; */
-  transform: translateY(-320px);
+  /* transform: translateY(-320px); */
 }
 
 .container div {

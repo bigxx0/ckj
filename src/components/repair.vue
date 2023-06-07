@@ -123,16 +123,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 80%;
+    width: 98%;
     float: right;
     justify-content: center;
     align-items: center;
+    margin: 0 20px;
     /* background-color: red; */
 }
 
 .up {
     display: flex;
-    width: 100%;
+    width: 98%;
     height: 110px;
     float: right;
     align-items: center;

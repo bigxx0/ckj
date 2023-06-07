@@ -131,6 +131,7 @@ async function getData() {
 async function postData() {
   try {
     const response = await axios.post('/api/login', {
+      //  JSON 格式的 request body
       username: 'admin',
       password: '123456'
     });
@@ -559,7 +560,7 @@ console.log(doubledNumbers); //[ 2, 4, 6, 8, 10 ]
 
 ## 七、字符串操作
 
-###  (一)、substring()方法和slice()方法
+### (一)、substring()方法和slice()方法
 
 1、substring()方法
 
@@ -592,7 +593,7 @@ console.log(str2.slice(3, -4)); //一杯卡
 console.log(str2);    //给我来一杯卡布奇诺!
 ```
 
-###  (二)、replace()方法和replaceAll()方法
+### (二)、replace()方法和replaceAll()方法
 
 1、replace()方法
 
@@ -1122,4 +1123,232 @@ console.log(str2.charCodeAt(6)); //NaN
 
 如果指定的索引位置不存在字符，则codePointAt()方法返回NaN。
 
-## 八、pinia状态管理库
+## 八、vue路由
+
+### (一)、组件式路由
+
+#### 1、路由传参（路由的query参数）
+
+Query 参数：以 `?` 开头，后面跟随一组键值对，每个键值对之间用 `&` 分隔。 例如：`/user?id=123&name=Tom。`主要用于过滤、排序、分页等场景，例如搜索结果页面按照价格从低到高排序，商品列表页面根据分类筛选等。
+
+```js
+<!-- 跳转并携带query参数，to的字符串写法 -->
+<router-link :to="/home/message/detail?id=666&title=你好">跳转</router-link>
+  
+<!-- 跳转并携带query参数，to的对象写法 -->
+<router-link 
+ :to="{
+  path:'/home/message/detail',
+  query:{
+     id:666,
+     title:'你好'
+  }
+ }"
+>跳转</router-link>
+
+<!-- 跳转并携带query参数，点击事件写法 -->
+toComponentTwo(item) {
+  this.$router.push({
+    path: "/gdDetails",
+    query: {
+    id: JSON.stringify(item),
+    },
+ });
+},
+
+
+<!-- 接受参数 -->
+$route.query.id
+$route.query.title
+```
+
+#### 2、动态路由（路由的params参数）
+
+Params 参数：使用占位符的方式将参数直接插入到 URL 中，以冒号 `:` 开头。 例如：`/user/:id`。主要用于表示动态路由的参数，例如个人中心页面的路由 `/user/:id` 中的 `:id` 就是一个参数占位符，用来表示用户的 ID。
+
+```js
+// 路由配置
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/users/:userId', // 使用占位符声明接收params参数
+      name：user，
+      component: User,
+      props: true
+    }
+  ]
+});
+
+// 传递参数
+<!-- 跳转并携带params参数，to的字符串写法 -->
+<router-link :to="/home/message/detail/666/你好">跳转</router-link>
+  
+<!-- 跳转并携带params参数，to的对象写法 -->
+<router-link 
+ :to="{
+  name:'xiangqing',
+  params:{
+     id:666,
+     title:'你好'
+  }
+ }"
+>跳转</router-link>
+
+// 接受参数
+$route.params.id
+$route.params.title
+```
+
+#### 3、简化跳转
+
+先给路由命名，跳转简化，可以不写路径直接写名字
+
+```js
+{
+ path:'/demo',
+ component:Demo,
+ children:[
+  {
+   path:'test',
+   component:Test,
+   children:[
+    {
+     name:'hello', //给路由命名
+     path:'welcome',
+     component:Hello,
+    }
+   ]
+  }
+ ]
+}
+```
+
+```js
+<!--简化前，需要写完整的路径 -->
+<router-link to="/demo/test/welcome">跳转</router-link>
+
+<!--简化后，直接通过名字跳转 -->
+<router-link :to="{name:'hello'}">跳转</router-link>
+
+<!--简化写法配合传递参数 -->
+<router-link 
+ :to="{
+  name:'hello',
+  query:{
+     id:666,
+     title:'你好'
+  }
+ }"
+>跳转</router-link>
+```
+
+### (二)、编程式导航
+
+编程式导航是在组件中进行的，需要手动调用 `$router.push` 等方法来进行路由跳转，需要通过对象的形式进行参数的传递，例如 `params` 对象。
+
+```js
+//$router的两个API：Push、Replace
+this.$router.push({
+ name:'User',
+  // 传递参数
+  params:{
+   id:xxx,
+   title:xxx
+  }
+})
+
+this.$router.replace({
+ name:'User',
+  params:{
+   id:xxx,
+   title:xxx
+  }
+})
+this.$router.forward() //前进
+this.$router.back() //后退
+this.$router.go() //可前进也可后退
+```
+
+### (三)、路由守卫
+
+分类：全局守卫、独享守卫、组件内守卫
+
+#### (1)、全局守卫
+
+```js
+//全局前置守卫：初始化时执行、每次路由切换前执行
+router.beforeEach((to,from,next)=>{
+ console.log('beforeEach',to,from)
+ if(to.meta.isAuth){ //判断当前路由是否需要进行权限控制
+  if(localStorage.getItem('school') === 'atguigu'){ //权限控制的具体规则
+   next() //放行
+  }else{
+   alert('暂无权限查看')
+   // next({name:'guanyu'})
+  }
+ }else{
+  next() //放行
+ }
+})
+
+//全局后置守卫：初始化时执行、每次路由切换后执行
+router.afterEach((to,from)=>{
+ console.log('afterEach',to,from)
+ if(to.meta.title){ 
+  document.title = to.meta.title //修改网页的title
+ }else{
+  document.title = 'vue_test'
+ }
+})
+```
+
+#### (2)、独享守卫
+
+```js
+beforeEnter(to,from,next){
+ console.log('beforeEnter',to,from)
+ if(to.meta.isAuth){ //判断当前路由是否需要进行权限控制
+  if(localStorage.getItem('school') === 'atguigu'){
+   next()
+  }else{
+   alert('暂无权限查看')
+   // next({name:'guanyu'})
+  }
+ }else{
+  next()
+ }
+}
+```
+
+#### (3)、组件内守卫
+
+```js
+//进入守卫：通过路由规则，进入该组件时被调用
+beforeRouteEnter (to, from, next) {
+},
+//离开守卫：通过路由规则，离开该组件时被调用
+beforeRouteLeave (to, from, next) {
+}
+```
+
+### (四)、路由器的工作模式
+
+(1)、对于一个url来说，什么是hash值？—— #及其后面的内容就是hash值。
+
+(2)、hash值不会包含在 HTTP 请求中，即：hash值不会带给服务器。
+
+(3)、工作模式:
+
+#### 1、hash模式：
+
+1. 地址中永远带着#号，不美观 。
+2. 若以后将地址通过第三方手机app分享，若app校验严格，则地址会被标记为不合法。
+3. 兼容性较好。
+4. hash 模式： `createWebHashHistory()` 是用于创建 hash 模式的路由历史记录对象的工厂函数。
+
+#### 2、history模式：
+
+1. 地址干净，美观 。
+2. 兼容性和hash模式相比略差。
+3. 应用部署上线时需要后端人员支持，解决刷新页面服务端404的问题。
+4. history模式： createWebHistory(),创建history模式。

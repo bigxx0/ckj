@@ -24,6 +24,12 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     console.log('响应拦截成功：', response.data);
+    // 验证token是否过期，过期则清除
+    if(response.data.code == 401){
+      alert('登录过期，请重新登录。')
+      localStorage.removeItem('token');
+      console.log('token:'+ token + '已清除');
+    }  
     return response;
   },
   (error) => {

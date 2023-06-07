@@ -235,27 +235,26 @@
       </div>
     </div>
 
-    <div class="up">
-      <router-link to="home">
-        <div><img class="logo" src="../../src/assets/images/logo.png"></div>
-      </router-link>
-      <div class="up-left">
-        <div class="nav-l">创科捷智能技术有限公司</div>
-        <!-- <div class="nav-l">Chats</div>
-        <div class="nav-l">资源中心</div> -->
-      </div>
-      <div class="up-right">
-        <!-- <div class="nav-r"><el-icon>
-            <Search style="width:42px;height:20px;vertical-align: middle;" />
-          </el-icon></div> -->
-        <div class="nav-r">管理员</div>
-        <router-link to="/login">
-          <div class="nav-r"><img class="user" src="../../src/assets/images/avuor.jpg"></div>
-        </router-link>
-      </div>
+      <div class="up">
+          <div class="up-top">  
+            <router-link to="home">
+              <div><img class="logo" src="../../src/assets/images/logo.png"></div>
+            </router-link>
+            <div class="up-left">
+              <div class="nav-l">创科捷智能技术有限公司</div>
+            </div>
+            <div class="up-right">
+              <div class="nav-r">管理员</div>
+            <router-link to="/login">
+              <div class="nav-r"><img class="user" src="../../src/assets/images/avuor.jpg"></div>
+            </router-link>
+          </div>
+        </div>
+      
+      <router-view></router-view>
     </div>
 
-    <router-view class="view"></router-view>
+
   </div>
 </template>
 
@@ -326,20 +325,20 @@ export default {
 }
 
 
-.view {
-  position: absolute;
-  transform: translate(350px, 150px);
-}
-
 .up {
   display: flex;
-  flex: 2;
-  width: 100%;
+  flex:2;
+  /* width: 80%; */
+  flex-direction: column;
+}
+
+.up-top{
+  display: flex;
+  flex-direction: row;
   height: 110px;
+  width: 100%;
   font-weight: 600;
-  /* border-bottom: 1px solid rgba(97, 94, 94, 0.8) ; */
   box-shadow: 1px 2px 8px #c4c2c2;
-  /* background-color: rgb(188, 188, 255); */
 }
 
 .logo {

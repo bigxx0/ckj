@@ -258,7 +258,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 80%;
+  width: 98%;
   justify-content: center;
   align-items: flex-start;
   /* background-color: red; */

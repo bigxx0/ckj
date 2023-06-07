@@ -92,7 +92,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  width: 60%;
+  width: 98%;
   justify-content: center;
   align-items: center;
   /* transform: translateY(-300px); */

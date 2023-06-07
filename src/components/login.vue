@@ -36,7 +36,7 @@ export default {
         if (!token) {
             // alert("登录过期，请先登录")
             this.fail()
-            console.log(token)
+            console.log('token:'+ token)
         }else{
             // alert("您已登录")
             this.logined()
